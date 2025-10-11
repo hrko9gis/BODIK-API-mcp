@@ -13,23 +13,23 @@ BODIK APIを利用して、自治体オープンデータを検索できるMCP�
 
 #### 2. list_organizations
 
-特定データセットを提供する自治体一覧を取得
+データセットを提供する自治体一覧を取得
 
 #### 3. list_all_organizations
 
 全自治体一覧を取得
 
-#### 4. get_config
+#### 4. get_apiviewer
 
-データセット構成情報の取得
+特定APIのスキーマ・メタ情報を取得
 
 #### 5. search_get
 
-GET検索
+任意のAPIをGETで検索
 
 #### 6. search_post
 
-POST検索（高度検索）
+任意のAPIをPOSTで検索（高度条件対応）
 
 #### 7. search_get_records
 
@@ -38,10 +38,6 @@ GET検索結果からpropertiesのみ抽出
 #### 8. search_get_csv
 
 GET検索結果をCSV形式で返す
-
-#### 9. search_get_geojson
-
-GET検索結果をGeoJSON形式で返す
 
 ## Claude Desktop での使用
 
