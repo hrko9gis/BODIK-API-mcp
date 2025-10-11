@@ -39,6 +39,10 @@ GET検索結果からpropertiesのみ抽出
 
 GET検索結果をCSV形式で返す
 
+## 依存関係
+
+pip install aiohttp mcp
+
 ## Claude Desktop での使用
 
 Claude Desktop でMCPサーバーを追加して利用することができます。
