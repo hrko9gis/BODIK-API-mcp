@@ -7,11 +7,6 @@ BODIK API（自治体オープンデータカタログ）を **Model Context Pro
 - 条件を設定したデータの検索、取得
 
 ## 利用可能なツール
-#### 1. get_traffic_flow
-
-条件を指定して交通量データを検索、取得する
-
-
 #### 1. list_apinames
 
 利用可能なBODIKデータセットAPI名一覧を取得する
