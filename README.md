@@ -1,47 +1,51 @@
 # BODIK API MCPサーバー
 
-BODIK APIを利用して、自治体オープンデータを検索できるMCP（Model Context Protocol）サーバーです。
+BODIK API（自治体オープンデータカタログ）を **Model Context Protocol（MCP）** 経由で生成AIから安全かつ柔軟に利用できるようにする MCPサーバーです。
 
 ## 機能
 
 - 条件を設定したデータの検索、取得
 
 ## 利用可能なツール
+#### 1. get_traffic_flow
+
+条件を指定して交通量データを検索、取得する
+
+
 #### 1. list_apinames
 
-利用可能なAPI名一覧を取得
+利用可能なBODIKデータセットAPI名一覧を取得する
 
 #### 2. list_organizations
 
-データセットを提供する自治体一覧を取得
+データ提供組織一覧を取得する
 
 #### 3. list_all_organizations
 
-全自治体一覧を取得
 
-#### 4. get_apiviewer
+#### 4. get_config
 
-特定APIのスキーマ・メタ情報を取得
+データセット設定情報を取得する
 
 #### 5. search_get
 
-任意のAPIをGETで検索
+GETで検索してデータセットを取得する
 
 #### 6. search_post
 
-任意のAPIをPOSTで検索（高度条件対応）
+POSTで検索してデータセットを取得する
 
 #### 7. search_get_records
 
-GET検索結果からpropertiesのみ抽出
+属性情報のみ抽出して取得する
 
 #### 8. search_get_csv
 
-GET検索結果をCSV形式で返す
+CSV形式でデータを取得する
 
-## 依存関係
+#### 9. search_get_geojson
 
-pip install aiohttp mcp
+GeoJSON形式でデータを取得する
 
 ## Claude Desktop での使用
 
@@ -60,10 +64,7 @@ Claude Desktop でMCPサーバーを追加して利用することができま�
                 "＜BODIK-API-mcp.pyが存在するディレクトリを絶対パスで指定＞"
                 "run",
                 "BODIK-API-mcp.py"
-            ],
-            "env": {
-              "BODIK_API_BASE": "https://wapi.bodik.jp"
-            }
+            ]
         }
     }
 }
@@ -73,8 +74,16 @@ Claude Desktop でMCPサーバーを追加して利用することができま�
 
 ## ライセンス
 
-MIT
+BODIK APIの利用条件および各データ提供元のライセンスに従ってください。
 
 ## 謝辞
 
-このプロジェクトは、ビッグデータ＆オープンデータ・イニシアティブ九州（BODIK事業）のAPIを利用しています。APIの提供に感謝いたします。
+ビッグデータ＆オープンデータ・イニシアティブ九州（BODIK事業）のBODIK APIを利用しています。APIの提供に感謝いたします。
+
+## 参考資料
+
+* BODIK API Manual
+* [https://www.bodik.jp/project/bodik-api/bodik-api-manual/](https://www.bodik.jp/project/bodik-api/bodik-api-manual/)
+* API Viewer: [https://wapi.bodik.jp/apiviewer](https://wapi.bodik.jp/apiviewer)
+* API Search: [https://wapi.bodik.jp/apisearch](https://wapi.bodik.jp/apisearch)
+
