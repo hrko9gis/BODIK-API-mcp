@@ -13,10 +13,11 @@ BODIK API（自治体オープンデータカタログ）を **Model Context Pro
 
 #### 2. list_organizations
 
-データ提供組織一覧を取得する
+データを公開している組織の一覧を取得する
 
 #### 3. list_all_organizations
 
+BODIKに公開しているすべての組織の一覧を取得する
 
 #### 4. get_config
 
