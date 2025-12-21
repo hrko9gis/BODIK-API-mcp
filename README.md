@@ -52,17 +52,17 @@ Claude Desktop でMCPサーバーを追加して利用することができま�
 2. このMCPサーバーを追加します
 ```json
 {
-    "mcpServers": {
-        "BODIK-API-mcp": {
-            "command": "/Users/***/.local/bin/uv",
-            "args": [
-                "--directory",
-                "＜BODIK-API-mcp.pyが存在するディレクトリを絶対パスで指定＞"
-                "run",
-                "BODIK-API-mcp.py"
-            ]
-        }
+  "mcpServers": {
+    "bodik-api": {
+      "command": "python",
+      "args": [
+        "＜BODIK-API-mcp.pyが存在するディレクトリを絶対パスで指定＞\\BODIK-API-mcp.py"
+      ],
+      "env": {
+        "BODIK_API_BASE": "https://wapi.bodik.jp"
+      }
     }
+  }
 }
 ```
 
