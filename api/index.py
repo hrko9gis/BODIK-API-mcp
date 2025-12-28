@@ -226,14 +226,24 @@ sse = SseServerTransport("/api/index/messages")
 
 @app.get("/api/index/sse")
 async def handle_sse(request: Request):
-    # connect_scope を connect_sse に変更
-    async with sse.connect_sse(request.scope, request.receive, request.send) as scope:
+    # request から直接 scope, receive, send を取り出すことはできないため、
+    # MCPサーバーを実行するために必要なインターフェースを正しく渡します。
+    # FastAPI/Starletteでは、scope内にある receive と send を使用します。
+    scope = request.scope
+    receive = scope.get("receive")
+    send = scope.get("send")
+    
+    async with sse.connect_sse(scope, receive, send) as mcp_scope:
         await server.run(
-            scope.read_stream,
-            scope.write_stream,
+            mcp_scope.read_stream,
+            mcp_scope.write_stream,
             server.create_initialization_options()
         )
 
 @app.post("/api/index/messages")
 async def handle_messages(request: Request):
-    await sse.handle_post_request(request.scope, request.receive, request.send)
+    scope = request.scope
+    receive = scope.get("receive")
+    send = scope.get("send")
+    
+    await sse.handle_post_request(scope, receive, send)
