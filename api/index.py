@@ -154,13 +154,12 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 resp.raise_for_status()
                 return [TextContent(type="text", text=json.dumps(resp.json(), indent=2, ensure_ascii=False))]
 
-            elif name == "search_dataset":
+elif name == "search_dataset":
                 args_copy = dict(arguments)
                 apiname = args_copy.pop("apiname")
                 fields_provided = "fields" in args_copy
-                selected_fields = args_copy.pop("fields", DEFAULT_FIELDS)
-                
-                logger.info(f"search_dataset 0: {selected_fields}")
+                # telNumber を telephoneNumber に修正（または両方含める）
+                selected_fields = args_copy.pop("fields", ["name", "address", "telephoneNumber", "lat", "lon"])
                 
                 if "maxResults" not in args_copy:
                     args_copy["maxResults"] = 10
@@ -170,24 +169,41 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 resp.raise_for_status()
                 data = resp.json()
 
-                if isinstance(data, dict) and "result" in data:
-                    filtered_results = []
-                    for item in data.get("result", []):
-                        filtered_item = {f: item.get(f) for f in selected_fields if f in item}
-                        filtered_results.append(filtered_item)
-                    
-                    response_data = {
-                        "totalCount": data.get("totalCount"),
-                        "result": filtered_results
-                    }
-                    res_text = json.dumps(response_data, indent=2, ensure_ascii=False)
-                    if not fields_provided:
-                        res_text += "\n\n(ヒント: 'get_dataset_config' で項目名を確認し、'fields' を指定すると詳細な情報を取得できます)"
-                    logger.info(f"search_dataset 1: {res_text}")
-                    return [TextContent(type="text", text=res_text)]
+                # --- 修正のポイント: レスポンスをリストに正規化する ---
+                results = []
+                total_count = 0
+
+                if isinstance(data, list):
+                    results = data
+                    total_count = len(data)
+                elif isinstance(data, dict):
+                    # "result"キーがある場合、または辞書自体が1件のデータの場合に対応
+                    results = data.get("result", [data] if "apiname" not in data else [])
+                    total_count = data.get("totalCount", len(results))
                 
-                logger.info(f"search_dataset 2: {data}")
-                return [TextContent(type="text", text=json.dumps(data, indent=2, ensure_ascii=False))]
+                # フィルタリング処理の実行
+                filtered_results = []
+                for item in results:
+                    # 指定されたフィールドが存在する場合のみ抽出
+                    filtered_item = {f: item.get(f) for f in selected_fields if f in item}
+                    # 全くマッチしなかった項目を避けるため、空でない場合のみ追加
+                    if filtered_item:
+                        filtered_results.append(filtered_item)
+                    else:
+                        # フィルターが1つもマッチしない場合は元の項目を出す（デバッグ・利便性のため）
+                        filtered_results.append(item)
+
+                response_data = {
+                    "totalCount": total_count,
+                    "result": filtered_results
+                }
+                
+                res_text = json.dumps(response_data, indent=2, ensure_ascii=False)
+                if not fields_provided:
+                    res_text += "\n\n(ヒント: 'get_dataset_config' で項目名を確認し、'fields' を指定すると詳細な情報を取得できます)"
+                
+                logger.info(f"search_dataset filtered: {len(filtered_results)} items")
+                return [TextContent(type="text", text=res_text)]
 
             else:
                 raise ValueError(f"Unknown tool: {name}")
