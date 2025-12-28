@@ -3,6 +3,7 @@ import httpx
 import json
 import logging
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from mcp.server import Server
 from mcp.server.sse import SseServerTransport
 from mcp.types import Tool, TextContent
@@ -13,6 +14,15 @@ logger = logging.getLogger(__name__)
 
 # 1. サーバーの初期化
 app = FastAPI()
+
+# CORS設定を追加（ブラウザや外部からの接続を許可）
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 server = Server("BODIK-API-mcp")
 
 BASE_URL = "https://wapi.bodik.jp"
@@ -211,11 +221,8 @@ elif name == "search_dataset":
         except Exception as e:
             return [TextContent(type="text", text=f"Error: {str(e)}", isError=True)]
 
-
-
-# --- 前述の @server.list_tools() や @server.call_tool() をここに記述 ---
-
-sse = SseServerTransport("/api/index/sse")
+# SSEの設定
+sse = SseServerTransport("/api/index/messages")
 
 @app.get("/api/index/sse")
 async def handle_sse(request: Request):
@@ -229,5 +236,3 @@ async def handle_sse(request: Request):
 @app.post("/api/index/messages")
 async def handle_messages(request: Request):
     await sse.handle_post_request(request.scope, request.receive, request.send)
-
-# Vercelのエントリポイントとしてappを公開
