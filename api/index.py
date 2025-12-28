@@ -226,7 +226,8 @@ sse = SseServerTransport("/api/index/messages")
 
 @app.get("/api/index/sse")
 async def handle_sse(request: Request):
-    async with sse.connect_scope(request.scope, request.receive, request.send) as scope:
+    # connect_scope を connect_sse に変更
+    async with sse.connect_sse(request.scope, request.receive, request.send) as scope:
         await server.run(
             scope.read_stream,
             scope.write_stream,
