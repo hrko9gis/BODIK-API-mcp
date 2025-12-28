@@ -1,0 +1,4 @@
+mcp[server]
+fastapi
+httpx
+uvicorn
