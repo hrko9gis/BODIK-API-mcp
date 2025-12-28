@@ -164,7 +164,7 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 resp.raise_for_status()
                 return [TextContent(type="text", text=json.dumps(resp.json(), indent=2, ensure_ascii=False))]
 
-elif name == "search_dataset":
+            elif name == "search_dataset":
                 args_copy = dict(arguments)
                 apiname = args_copy.pop("apiname")
                 fields_provided = "fields" in args_copy
