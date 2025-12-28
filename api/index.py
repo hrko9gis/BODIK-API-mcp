@@ -142,7 +142,8 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 
                 # キー「fields」を削除して軽量化
                 if isinstance(data, dict):
-                    data.pop("fields", None)
+                    data.pop("fields", None)   # fieldsを削除
+                    data.pop("mapping", None)  # mappingを削除
 
                 logger.info(f"get_dataset_config: {data}")
                 return [TextContent(type="text", text=json.dumps(data, indent=2, ensure_ascii=False))]
