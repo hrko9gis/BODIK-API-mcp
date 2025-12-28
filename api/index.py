@@ -215,7 +215,7 @@ elif name == "search_dataset":
 
 # --- 前述の @server.list_tools() や @server.call_tool() をここに記述 ---
 
-sse = SseServerTransport("/api/index/messages") # Vercelのパスに合わせる
+sse = SseServerTransport("/api/index/sse")
 
 @app.get("/api/index/sse")
 async def handle_sse(request: Request):
