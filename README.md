@@ -58,7 +58,6 @@ MCP サーバーのコードをダウンロード: 下記URLにアクセスし�
 6. Claude Desktopへの登録
 claude_desktop_config.json（通常は以下のパスにあります）を開き、サーバーの設定を追加します。
 　Windows: %APPDATA%\Interactions\claude_desktop_config.json
-
 　macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
 
 ```json
