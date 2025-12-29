@@ -64,11 +64,11 @@ Claude Desktop でMCPサーバーを追加して利用することができま�
 
 　　　ダウンロード: 「Download raw file」をクリックしてコードをダウンロードします。
 
-6. ファイルの配置
+5. ファイルの配置
 
 　　　ダウンロードしたファイルを下記に配置します。work フォルダがない場合は作成します。​
 
-　 　C:\work
+　　 　C:\work
 
 6. Claude Desktopへの登録
 claude_desktop_config.json（通常は以下のパスにあります）を開き、サーバーの設定を追加します。
