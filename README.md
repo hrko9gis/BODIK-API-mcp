@@ -84,6 +84,3 @@ BODIK APIの利用条件および各データ提供元のライセンスに従�
 
 * BODIK API Manual
 * [https://www.bodik.jp/project/bodik-api/bodik-api-manual/](https://www.bodik.jp/project/bodik-api/bodik-api-manual/)
-* API Viewer: [https://wapi.bodik.jp/apiviewer](https://wapi.bodik.jp/apiviewer)
-* API Search: [https://wapi.bodik.jp/apisearch](https://wapi.bodik.jp/apisearch)
-
