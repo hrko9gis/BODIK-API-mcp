@@ -142,7 +142,6 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 if isinstance(data, dict):
                     data.pop("fields", None)
 
-                logger.info(f"get_dataset_config: {data}")
                 return [TextContent(type="text", text=json.dumps(data, indent=2, ensure_ascii=False))]
 
             elif name == "get_organization":
@@ -157,8 +156,6 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 fields_provided = "fields" in args_copy
                 selected_fields = args_copy.pop("fields", DEFAULT_FIELDS)
                 
-                logger.info(f"search_dataset 0: {selected_fields}")
-                
                 if "maxResults" not in args_copy:
                     args_copy["maxResults"] = 10
                 
@@ -166,24 +163,26 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
                 resp = await client.get(f"{BASE_URL}/{apiname}", params=params)
                 resp.raise_for_status()
                 data = resp.json()
-
-                if isinstance(data, dict) and "result" in data:
+                
+                if isinstance(data, dict) and "resultsets" in data:
                     filtered_results = []
-                    for item in data.get("result", []):
-                        filtered_item = {f: item.get(f) for f in selected_fields if f in item}
+                    
+                    resultsets = data["resultsets"]
+                    
+                    for item in data["resultsets"]["features"]:
+                        filtered_item = {f: item["properties"][f] for f in selected_fields if f in item["properties"]}
                         filtered_results.append(filtered_item)
                     
                     response_data = {
-                        "totalCount": data.get("totalCount"),
+                        "totalCount": data["metadata"]["totalCount"],
                         "result": filtered_results
                     }
                     res_text = json.dumps(response_data, indent=2, ensure_ascii=False)
                     if not fields_provided:
                         res_text += "\n\n(ヒント: 'get_dataset_config' で項目名を確認し、'fields' を指定すると詳細な情報を取得できます)"
-                    logger.info(f"search_dataset 1: {res_text}")
+                    
                     return [TextContent(type="text", text=res_text)]
                 
-                logger.info(f"search_dataset 2: {data}")
                 return [TextContent(type="text", text=json.dumps(data, indent=2, ensure_ascii=False))]
 
             else:
