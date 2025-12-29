@@ -49,19 +49,21 @@ Claude Desktop でMCPサーバーを追加して利用することができま�
 
 　　　公式サイトからダウンロード: 公式サイト（https://www.python.org/downloads/）にアクセスし、最新版 をダウンロードします。​
 
-　　　最新版をインストール: ダウンロードしたファイルを実行します。インストーラーの指示に従って完了させます。
-   　　　　　　　　　　　　　インストール画面の最初に出てくる 「Add Python to PATH」 というチェックボックスに必ずチェックを入れてください。​
+　　　最新版をインストール: ダウンロードしたファイルを実行します。インストーラーの指示に従って完了させます。インストール画面の最初に出てくる 「Add Python to PATH」 というチェックボックスに必ずチェックを入れてください。​
 
 3. 依存ライブラリのインストール
 
 　　　pip install mcp httpx
 
-4. MCP サーバーのファイルをダウンロード​
-MCP サーバーのコードをダウンロード: 下記URLにアクセスします。​
-　https://github.com/hrko9gis/BODIK-API-mcp/blob/main/BODIK-API-mcp.py​
-ダウンロード: 「Download raw file」をクリックしてコードをダウンロードします。
+4. MCP サーバーのファイルをダウンロード
+​
+　　　MCP サーバーのコードをダウンロード: 下記URLにアクセスします。​
 
-5. ファイルの配置: ダウンロードしたファイルを下記に配置します。work フォルダがない場合は作成します。​
+ 　　　https://github.com/hrko9gis/BODIK-API-mcp/blob/main/BODIK-API-mcp.py​
+
+　　　ダウンロード: 「Download raw file」をクリックしてコードをダウンロードします。
+
+6. ファイルの配置: ダウンロードしたファイルを下記に配置します。work フォルダがない場合は作成します。​
 
 　 　C:\work
 
