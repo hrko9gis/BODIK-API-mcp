@@ -33,6 +33,7 @@
 ## Claude Desktop での使用
 
 Claude Desktop でMCPサーバーを追加して利用することができます。
+下記手順ではC:\workにソースコードを配置して利用する前提で説明していますが、ご利用の環境に合わせて配置場所を変更してもらってかまいません。
 
 1. Node.js (npx) のインストール
 Claude Desktop とリモートサーバーを接続するツールを動かすために必要です。​
@@ -51,10 +52,10 @@ MCP サーバーのコードをダウンロード: 下記URLにアクセスし�
 　https://github.com/hrko9gis/BODIK-API-mcp/blob/main/BODIK-API-mcp.py​
 ダウンロード: 「Download raw file」をクリックしてコードをダウンロードします。
 
-3. ファイルの配置: ダウンロードしたファイルを下記に配置します。work フォルダがない場合は作成します。​
+5. ファイルの配置: ダウンロードしたファイルを下記に配置します。work フォルダがない場合は作成します。​
 　C:\work
 
-5. Claude Desktopへの登録
+6. Claude Desktopへの登録
 claude_desktop_config.json（通常は以下のパスにあります）を開き、サーバーの設定を追加します。
 Windows: %APPDATA%\Interactions\claude_desktop_config.json
 macOS: ~/Library/Application Support/Claude/claude_desktop_config.json
