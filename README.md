@@ -56,6 +56,7 @@ Claude Desktop でMCPサーバーを追加して利用することができま�
 　　　pip install mcp httpx
 
 4. MCP サーバーのファイルをダウンロード
+
 ​
 　　　MCP サーバーのコードをダウンロード: 下記URLにアクセスします。​
 
